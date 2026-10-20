@@ -1,0 +1,185 @@
+/* ============================================================
+   Hero.css — Styles for the landing / hero section
+   ============================================================ */
+
+/* The full-screen hero section */
+.hero {
+  min-height: 100vh;          /* At least 100% of viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 24px 60px;
+  text-align: center;
+}
+
+/* Animated gradient background mesh */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 80%, rgba(236, 72, 153, 0.08) 0%, transparent 60%);
+  animation: meshShift 8s ease-in-out infinite alternate; /* Pulse animation */
+}
+
+/* The mesh slowly shifts position */
+@keyframes meshShift {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 1;   transform: scale(1.05); }
+}
+
+/* Floating animated dots in the background */
+.hero-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(124, 58, 237, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px; /* Grid of dots */
+  animation: dotsMove 20s linear infinite;
+}
+
+@keyframes dotsMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* The actual content sits above the backgrounds */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+/* Small greeting above name */
+.hero-greeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent-secondary);
+  margin-bottom: 24px;
+  font-family: var(--font-code);
+  animation: fadeSlideDown 0.6s ease forwards; /* Entry animation */
+}
+
+/* The name — huge gradient text */
+.hero-name {
+  font-size: clamp(2.8rem, 7vw, 5.5rem); /* Responsive size */
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeSlideDown 0.8s ease 0.2s forwards;
+  opacity: 0;
+}
+
+/* Typewriter role text */
+.hero-role {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  min-height: 2.5rem; /* Reserve space so layout doesn't jump */
+  animation: fadeSlideDown 0.8s ease 0.4s forwards;
+  opacity: 0;
+}
+
+/* The accent color span inside role */
+.hero-role .highlight {
+  color: var(--accent-secondary);
+}
+
+/* Short bio text */
+.hero-bio {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+  animation: fadeSlideDown 0.8s ease 0.6s forwards;
+  opacity: 0;
+}
+
+/* CTA buttons row */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  animation: fadeSlideDown 0.8s ease 0.8s forwards;
+  opacity: 0;
+}
+
+/* Social links row */
+.hero-socials {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  animation: fadeSlideDown 0.8s ease 1s forwards;
+  opacity: 0;
+}
+
+/* Each social icon link */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.social-link:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Scroll down indicator at the bottom */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  animation: bounce 2s infinite;
+}
+
+/* Bounce up and down */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(-8px); }
+}
+
+/* Entry animation — fade in + slide from above */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-socials { flex-wrap: wrap; }
+}

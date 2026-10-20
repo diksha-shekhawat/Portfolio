@@ -1,0 +1,152 @@
+/* ============================================================
+   Timeline.css — Education & Experience vertical timeline
+   ============================================================ */
+
+.timeline-section {
+  background: var(--bg-primary);
+}
+
+/* The vertical line in the center */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* The central vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+  transform: translateX(-50%);
+}
+
+/* Each timeline entry */
+.timeline-item {
+  position: relative;
+  width: 45%;
+  margin-bottom: 48px;
+}
+
+/* Even items go on the right side */
+.timeline-item:nth-child(even) {
+  margin-left: 55%;
+}
+
+/* Odd items go on the left side, aligned right */
+.timeline-item:nth-child(odd) {
+  text-align: right;
+}
+
+/* The dot in the center of the timeline */
+.timeline-dot {
+  position: absolute;
+  top: 16px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.6);
+  z-index: 2;
+}
+
+/* Dot position for odd (left) items */
+.timeline-item:nth-child(odd) .timeline-dot {
+  right: -8%;
+  transform: translateX(50%);
+}
+
+/* Dot position for even (right) items */
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -8%;
+  transform: translateX(-50%);
+}
+
+/* The card for each entry */
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  text-align: left;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.timeline-card:hover {
+  box-shadow: 0 12px 30px var(--shadow);
+  transform: translateY(-4px);
+}
+
+/* Type badge: Education or Experience */
+.timeline-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.type-education {
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--accent-primary);
+}
+
+.type-experience {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent-secondary);
+}
+
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.timeline-org {
+  font-size: 0.85rem;
+  color: var(--accent-secondary);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.timeline-period {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  margin-bottom: 8px;
+}
+
+.timeline-detail {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── MOBILE: stack timeline vertically ── */
+@media (max-width: 640px) {
+  .timeline::before { left: 16px; }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    width: 100%;
+    margin-left: 32px;
+    text-align: left;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-dot,
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: -28px;
+    right: auto;
+    transform: none;
+  }
+}

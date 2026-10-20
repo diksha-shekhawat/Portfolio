@@ -1,0 +1,107 @@
+/* ============================================================
+   Skills.css — Styles for the Skills section
+   ============================================================ */
+
+.skills {
+  background: var(--bg-primary);
+}
+
+/* Grid of skill category cards */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+/* Each skill category card */
+.skill-category {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.skill-category:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px var(--shadow);
+}
+
+/* Category header (icon + title) */
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.category-icon {
+  font-size: 1.8rem;
+}
+
+.category-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Individual skill bar wrapper */
+.skill-bar-wrapper {
+  margin-bottom: 18px;
+}
+
+/* Skill name row */
+.skill-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.skill-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-emoji { font-size: 1rem; }
+
+/* Percentage text */
+.skill-percent {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-secondary);
+  font-family: var(--font-code);
+}
+
+/* The background track of the bar */
+.skill-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden; /* So the fill doesn't spill out */
+}
+
+/* The colored fill bar that animates */
+.skill-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transform-origin: left;           /* Grow from the left side */
+  /* width is set inline (via style prop) */
+  /* The animation is triggered by adding class "animate" */
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* When the section is in view, animate the fill */
+.skill-fill.animate {
+  /* Width is set via inline style in JS */
+}
+
+@media (max-width: 500px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}

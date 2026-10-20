@@ -1,0 +1,136 @@
+/* ============================================================
+   Navbar.css — Styles for the top navigation bar
+   ============================================================ */
+
+/* The outer nav bar */
+.navbar {
+  position: fixed;          /* Sticks to top while scrolling */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;            /* Stays above all other content */
+  padding: 0 24px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(16px);    /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 10, 15, 0.8);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+/* In light mode, use lighter glass */
+body.light .navbar {
+  background: rgba(248, 250, 252, 0.85);
+}
+
+/* Logo text */
+.navbar-logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-code);
+  cursor: pointer;
+}
+
+/* Nav links container */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Each nav link */
+.nav-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+  background: none;
+  border: none;
+  font-family: var(--font-main);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all var(--transition);
+  color: var(--text-primary);
+  margin-left: 8px;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  transform: rotate(20deg);
+}
+
+/* Mobile hamburger menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+/* ──────────────────────────────────────────────
+   RESPONSIVE — Mobile styles
+   ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+
+  /* Hide links by default on mobile */
+  .navbar-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 20px;
+    gap: 4px;
+    transform: translateY(-120%);   /* Hidden above screen */
+    transition: transform var(--transition);
+  }
+
+  /* When open class is added, slide down */
+  .navbar-links.open {
+    transform: translateY(0);
+  }
+
+  .nav-link { width: 100%; text-align: center; }
+}

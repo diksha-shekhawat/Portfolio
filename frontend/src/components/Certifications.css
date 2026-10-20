@@ -1,0 +1,116 @@
+/* ============================================================
+   Certifications.css — Certifications & Achievements section
+   ============================================================ */
+
+.certifications {
+  background: var(--bg-secondary);
+}
+
+/* Two grids side by side */
+.cert-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.cert-group-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Certification card */
+.cert-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+  transition: all var(--transition);
+}
+
+.cert-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+/* The platform icon/logo area */
+.cert-icon {
+  font-size: 2rem;
+  min-width: 48px;
+  height: 48px;
+  background: rgba(124, 58, 237, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cert-info { flex: 1; }
+
+.cert-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.cert-provider {
+  font-size: 0.8rem;
+  color: var(--accent-secondary);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.cert-year {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-code);
+}
+
+/* Achievement card (for hackathon, positions) */
+.achievement-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 14px;
+  transition: all var(--transition);
+}
+
+.achievement-card:hover {
+  border-color: var(--accent-secondary);
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.achievement-medal {
+  font-size: 2rem;
+}
+
+.achievement-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.achievement-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .cert-layout { grid-template-columns: 1fr; gap: 40px; }
+}
