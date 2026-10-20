@@ -35,12 +35,37 @@ app.use(express.json());
 
 // ──────────────────────────────────────────────
 // CONNECT TO MONGODB
-// mongoose.connect() returns a Promise
 // ──────────────────────────────────────────────
+let mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/portfolio";
+
+// Smart sanitizer: If user passed unencoded @ or symbols in username/password for mongodb+srv
+if (mongoUri.startsWith("mongodb+srv://")) {
+  try {
+    const withoutPrefix = mongoUri.slice("mongodb+srv://".length);
+    const lastAt = withoutPrefix.lastIndexOf("@");
+    if (lastAt !== -1) {
+      const credentials = withoutPrefix.substring(0, lastAt);
+      const hostAndRest = withoutPrefix.substring(lastAt + 1);
+      const firstColon = credentials.indexOf(":");
+      if (firstColon !== -1) {
+        const rawUser = decodeURIComponent(credentials.substring(0, firstColon));
+        const rawPass = decodeURIComponent(credentials.substring(firstColon + 1));
+        mongoUri = `mongodb+srv://${encodeURIComponent(rawUser)}:${encodeURIComponent(rawPass)}@${hostAndRest}`;
+      }
+    }
+  } catch (e) {
+    // fallback to original if parsing fails
+  }
+}
+
+// Log masked URI so we can see the exact username and host being used in Render logs
+const maskedUri = mongoUri.replace(/:([^@]+)@/, ":****@");
+console.log(`Connecting to MongoDB: ${maskedUri}`);
+
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/portfolio")
+  .connect(mongoUri)
   .then(() => console.log("✅ MongoDB connected successfully"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .catch((err) => console.error("❌ MongoDB connection error:", err.message));
 
 // ──────────────────────────────────────────────
 // ROUTES
